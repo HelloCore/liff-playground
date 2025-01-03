@@ -39,7 +39,7 @@ function App() {
           runner={async () => {
             liff.openWindow({
               url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
-              external: true,
+              external: false,
             })
             return await liff.closeWindow()
           }}
