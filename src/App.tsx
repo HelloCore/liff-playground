@@ -64,6 +64,46 @@ function App() {
           }}
         />
         <Snippet
+          apiName="openAndCloseDelayTwice"
+          version="1.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#close-window"
+          skipAutoRun={true}
+          hideResponse={true}
+          needRequestPayload={true}
+          defaultRequestPayload={'5000'}
+          runner={async (payload) => {
+            liff.openWindow({
+              url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
+              external: false,
+            });
+            setTimeout(() => {
+              liff.closeWindow();
+              liff.closeWindow();
+            }, parseInt(payload, 10));
+          }}
+        />
+        <Snippet
+          apiName="openAndCloseDelayAndCloseDelay"
+          version="1.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#close-window"
+          skipAutoRun={true}
+          hideResponse={true}
+          needRequestPayload={true}
+          defaultRequestPayload={'5000'}
+          runner={async (payload) => {
+            liff.openWindow({
+              url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
+              external: false,
+            });
+            setTimeout(() => {
+              liff.closeWindow();
+              setTimeout(() => {
+                liff.closeWindow();
+              }, 500);
+            }, parseInt(payload, 10));
+          }}
+        />
+        <Snippet
           apiName="closeAndOpenDelay"
           version="1.0"
           docUrl="https://developers.line.biz/en/reference/liff/#close-window"
