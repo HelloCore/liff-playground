@@ -31,7 +31,7 @@ function App() {
         </div>
         <h1>Client APIs</h1>
         <Snippet
-          apiName="openAndClose"
+          apiName="openWindow"
           version="1.0"
           docUrl="https://developers.line.biz/en/reference/liff/#close-window"
           skipAutoRun={true}
@@ -41,6 +41,21 @@ function App() {
               url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
               external: false,
             })
+            // return await liff.closeWindow()
+            return null;
+          }}
+        />
+        <Snippet
+          apiName="openAndClose"
+          version="1.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#close-window"
+          skipAutoRun={true}
+          hideResponse={true}
+          runner={async () => {
+            await liff.openWindow({
+              url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
+              external: false,
+            });
             return await liff.closeWindow()
           }}
         />
