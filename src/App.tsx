@@ -51,6 +51,8 @@ function App() {
           docUrl="https://developers.line.biz/en/reference/liff/#close-window"
           skipAutoRun={true}
           hideResponse={true}
+          needRequestPayload={true}
+          defaultRequestPayload={'1000'}
           runner={async () => {
             liff.openWindow({
               url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
@@ -58,7 +60,25 @@ function App() {
             });
             setTimeout(() => {
               liff.closeWindow();
-            }, 1000);
+            }, parseInt(payload, 10));
+          }}
+        />
+        <Snippet
+          apiName="closeAndOpenDelay"
+          version="1.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#close-window"
+          skipAutoRun={true}
+          hideResponse={true}
+          needRequestPayload={true}
+          defaultRequestPayload={'1000'}
+          runner={async (payload) => {
+            liff.closeWindow();
+            setTimeout(() => {
+              liff.openWindow({
+                url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
+                external: false,
+              });
+            }, parseInt(payload, 10));
           }}
         />
         <Snippet
