@@ -46,17 +46,17 @@ function App() {
           }}
         />
         <Snippet
-          apiName="openAndClose"
+          apiName="closeAndOpen"
           version="1.0"
           docUrl="https://developers.line.biz/en/reference/liff/#close-window"
           skipAutoRun={true}
           hideResponse={true}
           runner={async () => {
+            liff.closeWindow();
             await liff.openWindow({
               url: 'https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01',
               external: false,
             });
-            return await liff.closeWindow()
           }}
         />
         <Snippet
