@@ -61,7 +61,8 @@ function App() {
           apiName="redirect"
           version="2.0"
           docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
-          needRequestPayload={true}
+          needRequestPayload={true}            
+          skipAutoRun={true}
           defaultRequestPayload={lastURL}
           runner={async (params) => {
             window.localStorage.setItem("lastURL",params)
