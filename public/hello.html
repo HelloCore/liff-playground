@@ -335,7 +335,7 @@
       if (settings.fallback || settings.fallbackToWeb) {
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
-      document.addEventListener("visibilitychange",function {
+      document.addEventListener("visibilitychange",function() {
         document.body.innerHTML += "on hide hidden ["+document.hidden+"] <br />";
         document.body.innerHTML += "on hide visibilityState ["+document.visibilityState+"] <br />";
         
