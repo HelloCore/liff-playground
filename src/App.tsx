@@ -31,6 +31,29 @@ function App() {
           <img src={qrCode} className={styles.qrCode} />
         </div>
         <h1>Client APIs</h1>
+        <Snippet
+          apiName="redirect"
+          version="2.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
+          needRequestPayload={false}            
+          skipAutoRun={true}
+          runner={async () => {
+            window.location.href = "https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01";
+          }}
+        />
+        <Snippet
+          apiName="openWindow"
+          version="2.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
+          needRequestPayload={false}            
+          skipAutoRun={true}
+          runner={async () => {
+            liff.openWindow({
+              url: "https://info.scb.co.th/scbeasy/easy_app_link.html?URI=scblvl://drtdr/landing?prodPackageId=0014_TJ_RV_01",
+              external: true,
+            });
+          }}
+        />
         {!isLoggedIn ? (
           <Snippet
             apiName="liff.login()"
@@ -58,7 +81,7 @@ function App() {
           />
         )}
         <Snippet
-          apiName="redirect"
+          apiName="redirectWithLink"
           version="2.0"
           docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
           needRequestPayload={true}            
