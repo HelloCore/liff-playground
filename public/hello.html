@@ -349,7 +349,7 @@
             const now = new Date();
             const diffFromHidden = now.valueOf() - hiddenDate.valueOf();
             document.body.innerHTML += "on show diff "+(diffFromHidden) +" <br />";
-            if(diff<500) {
+            if(diffFromHidden<500) {
               timeout = setTimeout(openFallback(Date.now()), settings.delay);
             }
           }
