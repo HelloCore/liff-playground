@@ -295,8 +295,11 @@
      */
     var openFallback = function (ts) {
       return function () {
+        document.body.innerHTML += "on fallback open <br />";
         var link = (settings.fallbackToWeb) ? getWebLink() : getStoreLink();
         var wait = settings.delay + settings.delta;
+        document.body.innerHTML += link + " <br />";
+        document.body.innerHTML += "on fallback open2 <br />";
         if (typeof link === "string" && (Date.now() - ts) < wait) {
           window.location.href = link;
         }
@@ -333,6 +336,7 @@
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
       $(document).on('hide', function () {
+        document.body.innerHTML += "on hide <br />";
         clearTimeout(timeout);
       });
       window.location.href = uri;
@@ -397,6 +401,8 @@
 
     if (deeplink.isMobile()) {
       if (isURIValid(uri)) {
+
+        document.body.innerHTML += "before open <br />";
         deeplink.open(uri);
       }
     }
