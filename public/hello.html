@@ -336,8 +336,10 @@
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
       $(document).on('hide', function () {
-        document.body.innerHTML += "on hide <br />";
-        clearTimeout(timeout);
+        document.body.innerHTML += "on hide is Hidden ["+document.hidden+"] <br />";
+        if(document.hidden){
+          clearTimeout(timeout);
+        }
       });
       window.location.href = uri;
       return true;
