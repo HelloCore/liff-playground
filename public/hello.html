@@ -335,14 +335,27 @@
       if (settings.fallback || settings.fallbackToWeb) {
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
-      document.addEventListener("visibilitychange",function() {
+      var openLinkDate;
+      var hiddenDate;
+      document.addEventListener("visibilitychange", function() {
         document.body.innerHTML += "on hide hidden ["+document.hidden+"] <br />";
-        document.body.innerHTML += "on hide visibilityState ["+document.visibilityState+"] <br />";
         
         if(document.hidden){
+          hiddenDate = new Date();
+          document.body.innerHTML += "on hidden diff "+(hiddenDate.valueOf() - openLinkDate.valueOf()) +" <br />";
           clearTimeout(timeout);
+        }else{
+          if(hiddenDate != null) {
+            const now = new Date();
+            const diffFromHidden = now.valueOf() - hiddenDate.valueOf();
+            document.body.innerHTML += "on show diff "+(diffFromHidden) +" <br />";
+            if(diff<500) {
+              timeout = setTimeout(openFallback(Date.now()), settings.delay);
+            }
+          }
         }
       });
+      openLinkDate = new Date();
       window.location.href = uri;
       return true;
     }
