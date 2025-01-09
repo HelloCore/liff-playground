@@ -368,9 +368,10 @@
 
     var isURIValid = function (uri) {
       if (uri) {
-        var res = /(^(scbeasy|scblvl|scbnhox)\:\/\/)/i.test(uri);
-        var isMail = !uri.includes("@"); 
-        return (res && isMail);
+        // var res = /(^(scbeasy|scblvl|scbnhox|market)\:\/\/)/i.test(uri);
+        // var isMail = !uri.includes("@"); 
+        // return (res && isMail);
+        return true;
       }
     }
 
