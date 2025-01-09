@@ -23,13 +23,6 @@ function App() {
     <FilterContext.Provider value={filter}>
       <Header />
       <div className={styles.container}>
-        <div className={styles.liffIdBox}>
-          <Input
-            readonly
-            value={`LIFF URL: https://liff.line.me/${import.meta.env.VITE_LIFF_ID.toString()}`}
-          />
-          <img src={qrCode} className={styles.qrCode} />
-        </div>
         <h1>Client APIs</h1>
         <Snippet
           apiName="redirect"
