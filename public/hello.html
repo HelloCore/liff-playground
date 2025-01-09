@@ -9,7 +9,7 @@
 
   <span id="osName"></span>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script>
+<!--   <script>
   /*!
    * jquery-visibility v1.0.12
    * Page visibility shim for jQuery.
@@ -98,7 +98,7 @@
       updateState();
     });
   }));
-  </script>
+  </script> -->
   <script>
   /**
    * browser-deeplink v0.1
@@ -335,7 +335,7 @@
       if (settings.fallback || settings.fallbackToWeb) {
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
-      $(document).on('hide', function () {
+      document.addEventListener("visibilitychange",function {
         document.body.innerHTML += "on hide hidden ["+document.hidden+"] <br />";
         document.body.innerHTML += "on hide visibilityState ["+document.visibilityState+"] <br />";
         
