@@ -57,6 +57,16 @@ function App() {
           />
         )}
         <Snippet
+          apiName="redirect"
+          version="2.0"
+          docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
+          needRequestPayload={true}
+          defaultRequestPayload={'https://www.google.com'}
+          runner={async (params) => {
+            window.location.href = params;
+          }}
+        />
+        <Snippet
           apiName="liff.getOS()"
           version="2.0"
           docUrl="https://developers.line.biz/en/reference/liff/#get-os"
