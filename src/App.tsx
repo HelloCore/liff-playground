@@ -18,6 +18,7 @@ function App() {
   } catch (e) {
     console.log(e)
   }
+  let lastURL = window.localStorage.getItem("lastURL") ?? "https://www.google.com"
   return (
     <FilterContext.Provider value={filter}>
       <Header />
@@ -61,8 +62,10 @@ function App() {
           version="2.0"
           docUrl="https://developers.line.biz/en/reference/liff/#permanent-linke-set-extra-query-param"
           needRequestPayload={true}
-          defaultRequestPayload={'https://www.google.com'}
+          defaultRequestPayload={lastURL}
           runner={async (params) => {
+            window.localStorage.setItem("lastURL",params)
+
             window.location.href = params;
           }}
         />
