@@ -336,7 +336,9 @@
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
       $(document).on('hide', function () {
-        document.body.innerHTML += "on hide is Hidden ["+document.hidden+"] <br />";
+        document.body.innerHTML += "on hide hidden ["+document.hidden+"] <br />";
+        document.body.innerHTML += "on hide visibilityState ["+document.visibilityState+"] <br />";
+        
         if(document.hidden){
           clearTimeout(timeout);
         }
