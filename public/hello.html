@@ -8,8 +8,10 @@
 <body>
 
   <span id="osName"></span>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!--   <script>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
   /*!
    * jquery-visibility v1.0.12
    * Page visibility shim for jQuery.
@@ -98,7 +100,7 @@
       updateState();
     });
   }));
-  </script> -->
+  </script>
   <script>
   /**
    * browser-deeplink v0.1
@@ -295,11 +297,8 @@
      */
     var openFallback = function (ts) {
       return function () {
-        document.body.innerHTML += "on fallback open <br />";
         var link = (settings.fallbackToWeb) ? getWebLink() : getStoreLink();
         var wait = settings.delay + settings.delta;
-        document.body.innerHTML += link + " <br />";
-        document.body.innerHTML += "on fallback open2 <br />";
         if (typeof link === "string" && (Date.now() - ts) < wait) {
           window.location.href = link;
         }
@@ -332,30 +331,36 @@
         return;
       }
 
-      if (settings.fallback || settings.fallbackToWeb) {
+      var hideTime;
+      var closeTimeout;
+
+      if (!isMobileWebview() && settings.fallback || settings.fallbackToWeb) {
         timeout = setTimeout(openFallback(Date.now()), settings.delay);
       }
-      var openLinkDate;
-      var hiddenDate;
-      document.addEventListener("visibilitychange", function() {
-        document.body.innerHTML += "on hide hidden ["+document.hidden+"] <br />";
-        
-        if(document.hidden){
-          hiddenDate = new Date();
-          document.body.innerHTML += "on hidden diff "+(hiddenDate.valueOf() - openLinkDate.valueOf()) +" <br />";
-          clearTimeout(timeout);
+
+      $(document).on('hide', function () {
+        hideTime = new Date();
+        clearTimeout(timeout);
+
+        if(isAndroid()){
+            closeTimeout = setTimeout(function(){
+                liff.closeWindow();
+            }, 1000);
         }else{
-          if(hiddenDate != null) {
-            const now = new Date();
-            const diffFromHidden = now.valueOf() - hiddenDate.valueOf();
-            document.body.innerHTML += "on show diff "+(diffFromHidden) +" <br />";
-            if(diffFromHidden<500) {
-              timeout = setTimeout(openFallback(Date.now()), settings.delay);
-            }
-          }
+            liff.closeWindow();
         }
       });
-      openLinkDate = new Date();
+      
+      $(document).on('show', function () {
+        if(hideTime != null && isAndroid()) {
+            clearTimeout(closeTimeout);
+            const diffTimeInMS = (new Date()).valueOf() - hideTime.valueOf();
+            if(diffTimeInMS <= 500) {
+                timeout = setTimeout(openFallback(Date.now()), settings.delay);
+            }
+        }
+      });
+
       window.location.href = uri;
       return true;
     }
@@ -383,10 +388,9 @@
 
     var isURIValid = function (uri) {
       if (uri) {
-        // var res = /(^(scbeasy|scblvl|scbnhox|market)\:\/\/)/i.test(uri);
-        // var isMail = !uri.includes("@"); 
-        // return (res && isMail);
-        return true;
+        var res = /(^(scbeasy|scblvl|scbnhox)\:\/\/)/i.test(uri);
+        var isMail = !uri.includes("@"); 
+        return (res && isMail);
       }
     }
 
@@ -419,8 +423,6 @@
 
     if (deeplink.isMobile()) {
       if (isURIValid(uri)) {
-
-        document.body.innerHTML += "before open <br />";
         deeplink.open(uri);
       }
     }
